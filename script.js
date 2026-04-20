@@ -21,8 +21,10 @@ const country_list = [
 const fromCurr = document.querySelector("#fromCurrency");
 const toCurr = document.querySelector("#toCurrency");
 const getBtn = document.querySelector("#getBtn");
+const exchangeIcon = document.querySelector(".icon"); // Selektor buat tombol panah
 const exchangeRateTxt = document.querySelector(".exchange-rate");
 
+// 1. Load Dropdown saat halaman dibuka
 window.addEventListener("load", () => {
     country_list.forEach(code => {
         let selectedFrom = code == "IDR" ? "selected" : "";
@@ -33,16 +35,25 @@ window.addEventListener("load", () => {
     getExchangeRate();
 });
 
+// 2. Fungsi Tombol Tukar (Swap) - BIAR TOMBOL PANAH JALAN
+exchangeIcon.addEventListener("click", () => {
+    let tempCode = fromCurr.value; // Simpan sementara mata uang asal
+    fromCurr.value = toCurr.value; // Ubah asal jadi tujuan
+    toCurr.value = tempCode;       // Ubah tujuan jadi asal
+    getExchangeRate();             // Langsung update kursnya
+});
+
+// 3. Fungsi Tombol Konversi
 getBtn.addEventListener("click", e => {
     e.preventDefault();
     getExchangeRate();
 });
 
+// 4. Logika Ambil Kurs
 async function getExchangeRate() {
     const amount = document.querySelector("form input");
     let amountVal = amount.value;
     
-    // Validasi input biar gak kosong atau nol
     if (amountVal === "" || amountVal === "0") {
         amount.value = "1";
         amountVal = 1;
@@ -54,16 +65,15 @@ async function getExchangeRate() {
         const response = await fetch(`/api/convert?from=${fromCurr.value}`);
         const result = await response.json();
         
-        // Cek apakah data rates ada dalam response
         if (result.conversion_rates) {
             let rate = result.conversion_rates[toCurr.value];
             let total = (amountVal * rate).toLocaleString('id-ID', { minimumFractionDigits: 2 });
+            // Pastikan teks pakai label mata uang yang dipilih (bukan hardcoded USD)
             exchangeRateTxt.innerText = `${amountVal} ${fromCurr.value} = ${total} ${toCurr.value}`;
         } else {
             exchangeRateTxt.innerText = "Data kurs tidak ditemukan.";
         }
     } catch (error) {
-        console.error(error);
         exchangeRateTxt.innerText = "Gagal mengambil data.";
     }
-} // Titik koma atau koma tadi sudah dihapus di sini
+}
