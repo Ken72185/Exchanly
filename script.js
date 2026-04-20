@@ -19,66 +19,41 @@ const country_list = [
     "ZMW", "ZWL"
 ];
 
+
 const fromCurr = document.querySelector("#fromCurrency");
 const toCurr = document.querySelector("#toCurrency");
 const getBtn = document.querySelector("#getBtn");
-const amountInput = document.querySelector(".amount input");
 const exchangeRateTxt = document.querySelector(".exchange-rate");
 
-// Isi Dropdown secara otomatis
 window.addEventListener("load", () => {
-    for (let i = 0; i < country_list.length; i++) {
-        let code = country_list[i];
-        
-        // Default: Dari IDR ke USD
+    country_list.forEach(code => {
         let selectedFrom = code == "IDR" ? "selected" : "";
         let selectedTo = code == "USD" ? "selected" : "";
-
-        let optionTagFrom = `<option value="${code}" ${selectedFrom}>${code}</option>`;
-        let optionTagTo = `<option value="${code}" ${selectedTo}>${code}</option>`;
-        
-        fromCurr.insertAdjacentHTML("beforeend", optionTagFrom);
-        toCurr.insertAdjacentHTML("beforeend", optionTagTo);
-    }
-    getExchangeRate(); // Jalankan kurs saat pertama buka
+        fromCurr.insertAdjacentHTML("beforeend", `<option value="${code}" ${selectedFrom}>${code}</option>`);
+        toCurr.insertAdjacentHTML("beforeend", `<option value="${code}" ${selectedTo}>${code}</option>`);
+    });
+    getExchangeRate();
 });
 
-// Event Klik Tombol
 getBtn.addEventListener("click", e => {
     e.preventDefault();
     getExchangeRate();
 });
 
-// Tombol Tukar (Swap) posisi mata uang
-const exchangeIcon = document.querySelector(".icon");
-exchangeIcon.addEventListener("click", () => {
-    let tempCode = fromCurr.value;
-    fromCurr.value = toCurr.value;
-    toCurr.value = tempCode;
-    getExchangeRate();
-});
-
 async function getExchangeRate() {
     const amount = document.querySelector("form input");
-    let amountVal = amount.value;
-    if (amountVal == "" || amountVal == "0") {
-        amount.value = "1";
-        amountVal = 1;
-    }
-
-    exchangeRateTxt.innerText = "Mengambil data kurs...";
-
-    // GANTI 'YOUR_API_KEY' dengan API Key dari exchangerate-api.com
-    const API_KEY = "4674ab73367c03b754d1fada"; 
-    let url = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${fromCurr.value}`;
+    let amountVal = amount.value || 1;
+    exchangeRateTxt.innerText = "Sabar, lagi ngitung...";
 
     try {
-        const response = await fetch(url);
+        // Kita panggil API internal Vercel, bukan API eksternal langsung
+        const response = await fetch(`/api/convert?from=${fromCurr.value}`);
         const result = await response.json();
-        let exchangeRate = result.conversion_rates[toCurr.value];
-        let totalExRate = (amountVal * exchangeRate).toLocaleString('id-ID', { minimumFractionDigits: 2 });
-        exchangeRateTxt.innerText = `${amountVal} ${fromCurr.value} = ${totalExRate} ${toCurr.value}`;
+        
+        let rate = result.conversion_rates[toCurr.value];
+        let total = (amountVal * rate).toLocaleString('id-ID', { minimumFractionDigits: 2 });
+        exchangeRateTxt.innerText = `${amountVal} ${fromCurr.value} = ${total} ${toCurr.value}`;
     } catch (error) {
-        exchangeRateTxt.innerText = "Ada yang salah / API Key belum diisi";
+        exchangeRateTxt.innerText = "Gagal mengambil data.";
     }
-      }
+}
