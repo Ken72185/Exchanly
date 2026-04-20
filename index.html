@@ -3,38 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exchanly - Konverter Mata Uang</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Exchanly - Konverter Mata Uang Modern</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="wrapper">
-        <header>Curr.io</header>
-        <form action="#">
-            <div class="amount">
-                <p>Masukkan Jumlah</p>
-                <input type="number" value="1">
+    <div class="blob-1"></div>
+    <div class="blob-2"></div>
+
+    <main class="container">
+        <section class="hero-text">
+            <h1>Curr.io<span>.</span></h1>
+            <p>Konversi mata uang global secara real-time dengan akurasi tinggi. Solusi cepat untuk kebutuhan transaksi internasional Anda.</p>
+            <div class="stats">
+                <div><strong>150+</strong><br>Mata Uang</div>
+                <div><strong>Live</strong><br>Update</div>
             </div>
-            <div class="drop-list">
-                <div class="from">
-                    <p>Dari</p>
-                    <div class="select-box">
-                        <select id="fromCurrency"></select>
+        </section>
+
+        <div class="wrapper">
+            <header>Konverter Kurs</header>
+            <form action="#">
+                <div class="amount">
+                    <p>Masukkan Jumlah</p>
+                    <div class="input-group">
+                        <span><i class="fas fa-coins"></i></span>
+                        <input type="number" value="1">
                     </div>
                 </div>
-                <div class="icon"><i class="fas fa-exchange-alt"></i></div>
-                <div class="to">
-                    <p>Ke</p>
-                    <div class="select-box">
-                        <select id="toCurrency"></select>
+                <div class="drop-list">
+                    <div class="from">
+                        <p>Dari</p>
+                        <div class="select-box">
+                            <select id="fromCurrency"></select>
+                        </div>
+                    </div>
+                    <div class="icon">
+                        <div class="icon-circle">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                    </div>
+                    <div class="to">
+                        <p>Ke</p>
+                        <div class="select-box">
+                            <select id="toCurrency"></select>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="exchange-rate">Klik tombol untuk konversi</div>
-            <button id="getBtn">Dapatkan Kurs</button>
-        </form>
-    </div>
+                <div class="exchange-rate">Mendapatkan kurs terbaru...</div>
+                <button id="getBtn">Hitung Sekarang</button>
+            </form>
+        </div>
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>
