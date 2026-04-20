@@ -3,59 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exchanly - Konverter Mata Uang Modern</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Curr.io - Solusi Tukar Mata Uang Masa Depan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="blob-1"></div>
-    <div class="blob-2"></div>
 
-    <main class="container">
-        <section class="hero-text">
-            <h1>Curr.io<span>.</span></h1>
-            <p>Konversi mata uang global secara real-time dengan akurasi tinggi. Solusi cepat untuk kebutuhan transaksi internasional Anda.</p>
-            <div class="stats">
-                <div><strong>150+</strong><br>Mata Uang</div>
-                <div><strong>Live</strong><br>Update</div>
-            </div>
-        </section>
-
-        <div class="wrapper">
-            <header>Konverter Kurs</header>
-            <form action="#">
-                <div class="amount">
-                    <p>Masukkan Jumlah</p>
-                    <div class="input-group">
-                        <span><i class="fas fa-coins"></i></span>
-                        <input type="number" value="1">
-                    </div>
-                </div>
-                <div class="drop-list">
-                    <div class="from">
-                        <p>Dari</p>
-                        <div class="select-box">
-                            <select id="fromCurrency"></select>
-                        </div>
-                    </div>
-                    <div class="icon">
-                        <div class="icon-circle">
-                            <i class="fas fa-exchange-alt"></i>
-                        </div>
-                    </div>
-                    <div class="to">
-                        <p>Ke</p>
-                        <div class="select-box">
-                            <select id="toCurrency"></select>
-                        </div>
-                    </div>
-                </div>
-                <div class="exchange-rate">Mendapatkan kurs terbaru...</div>
-                <button id="getBtn">Hitung Sekarang</button>
-            </form>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Curr<span>.io</span></div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Fitur</a></li>
+                <li><a href="#">API</a></li>
+            </ul>
+            <button class="btn-outline">Mulai Sekarang</button>
         </div>
-    </main>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="container hero-wrapper">
+            <div class="hero-content">
+                <span class="badge">Tercepat & Terakurat 2026</span>
+                <h1>Kelola Uang Anda Tanpa <span>Batas Negara.</span></h1>
+                <p>Dapatkan nilai tukar paling kompetitif dengan pembaruan data setiap detik. Transparan, aman, dan tanpa biaya tersembunyi.</p>
+                <div class="hero-btns">
+                    <button class="btn-primary">Pelajari Lebih Lanjut</button>
+                    <div class="users">
+                        <i class="fas fa-users"></i> 10jt+ Pengguna Aktif
+                    </div>
+                </div>
+            </div>
+
+            <div class="wrapper">
+                <header>Konversi Sekarang</header>
+                <form action="#">
+                    <div class="amount">
+                        <p>Masukkan Jumlah</p>
+                        <div class="input-group">
+                            <span><i class="fas fa-wallet"></i></span>
+                            <input type="number" value="1">
+                        </div>
+                    </div>
+                    <div class="drop-list">
+                        <div class="from">
+                            <p>Dari</p>
+                            <div class="select-box">
+                                <select id="fromCurrency"></select>
+                            </div>
+                        </div>
+                        <div class="icon">
+                            <div class="icon-circle"><i class="fas fa-exchange-alt"></i></div>
+                        </div>
+                        <div class="to">
+                            <p>Ke</p>
+                            <div class="select-box">
+                                <select id="toCurrency"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="exchange-rate">Siap menghitung kurs...</div>
+                    <button id="getBtn" class="btn-convert">Dapatkan Kurs</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Kenapa Pilih <span>Curr.io?</span></h2>
+            <div class="features-grid">
+                <div class="f-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Instan</h3>
+                    <p>Konversi dalam hitungan milidetik tanpa menunggu lama.</p>
+                </div>
+                <div class="f-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Aman</h3>
+                    <p>Enkripsi end-to-end untuk setiap kalkulasi data Anda.</p>
+                </div>
+                <div class="f-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Real-time</h3>
+                    <p>Data langsung dari pasar uang global secara live.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Curr.io Team. Dibuat dengan 🔥 untuk dunia.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
