@@ -1,4 +1,3 @@
-// Daftar Kode Mata Uang Dunia
 const country_list = [
     "AED", "AFN", "ALL", "AMD", "ANG", "AOA", "ARS", "AUD", "AWG", "AZN",
     "BAM", "BBD", "BDT", "BGN", "BHD", "BIF", "BMD", "BND", "BOB", "BRL",
@@ -18,7 +17,6 @@ const country_list = [
     "VND", "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "YER", "ZAR",
     "ZMW", "ZWL"
 ];
-
 
 const fromCurr = document.querySelector("#fromCurrency");
 const toCurr = document.querySelector("#toCurrency");
@@ -42,18 +40,30 @@ getBtn.addEventListener("click", e => {
 
 async function getExchangeRate() {
     const amount = document.querySelector("form input");
-    let amountVal = amount.value || 1;
+    let amountVal = amount.value;
+    
+    // Validasi input biar gak kosong atau nol
+    if (amountVal === "" || amountVal === "0") {
+        amount.value = "1";
+        amountVal = 1;
+    }
+
     exchangeRateTxt.innerText = "Sabar, lagi ngitung...";
 
     try {
-        // Kita panggil API internal Vercel, bukan API eksternal langsung
         const response = await fetch(`/api/convert?from=${fromCurr.value}`);
         const result = await response.json();
         
-        let rate = result.conversion_rates[toCurr.value];
-        let total = (amountVal * rate).toLocaleString('id-ID', { minimumFractionDigits: 2 });
-        exchangeRateTxt.innerText = `${amountVal} ${fromCurr.value} = ${total} ${toCurr.value}`;
+        // Cek apakah data rates ada dalam response
+        if (result.conversion_rates) {
+            let rate = result.conversion_rates[toCurr.value];
+            let total = (amountVal * rate).toLocaleString('id-ID', { minimumFractionDigits: 2 });
+            exchangeRateTxt.innerText = `${amountVal} ${fromCurr.value} = ${total} ${toCurr.value}`;
+        } else {
+            exchangeRateTxt.innerText = "Data kurs tidak ditemukan.";
+        }
     } catch (error) {
+        console.error(error);
         exchangeRateTxt.innerText = "Gagal mengambil data.";
     }
-}
+} // Titik koma atau koma tadi sudah dihapus di sini
